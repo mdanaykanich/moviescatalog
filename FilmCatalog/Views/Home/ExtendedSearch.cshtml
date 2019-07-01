@@ -1,0 +1,42 @@
+﻿@model FilmCatalog.Models.ExtendSearchCategs
+
+@{
+    ViewBag.Title = "Розширений пошук";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-2"></div>
+        <div class="col-2">
+            @Html.DropDownList("ddlGenres", new SelectList(Model.Genres.Select(g => new { Value = g, Text = g }), "Value", "Text"), new { @class = "form-control" })
+        </div>
+        <div class="col-2">
+            @Html.DropDownList("ddlCountries", new SelectList(Model.Countries.Select(c => new { Value = c, Text = c }), "Value", "Text"), new { @class = "form-control" })
+        </div>
+        <div class="col-2">
+            @Html.DropDownList("ddlYears", new SelectList(Model.Years.Select(y => new { Value = y, Text = y }), "Value", "Text"), new { @class = "form-control" })
+        </div>
+        <div class="col-2">
+            <button id="btnextsearch" class="btn btn-outline-dark my-2 my-sm-0">Пошук</button>
+        </div>
+    </div>
+
+    <div class="row" style="margin-top: 20px">
+        @foreach (var film in Model.Films)
+        {
+            <div class="col-lg-3" id="@film.Title">
+                <div style="width: 200px; margin: auto">
+                    <a href='@Url.Action("Details", "Home", new { id = film.Id })'>
+                        <img style="display: block; margin: auto" class="rounded-circle" src="@film.PosterPath" alt="Generic placeholder image" width="200" height="200">
+                    </a>
+                </div>
+                <h5 style="text-align: center">@film.Title</h5>
+                <div style="text-align: center">
+                    <span>@film.Year,&nbsp;</span>
+                    <span style="font-style: italic">@film.Country</span>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+

@@ -1,0 +1,48 @@
+﻿@using FilmCatalog.Models
+@model FilmGenreView
+
+@{
+    ViewBag.Title = "Нова книга";
+}
+
+
+
+@using (Html.BeginForm())
+{
+    @Html.LabelFor(model => model.Title, "Назва фільму")
+    <br />
+    @Html.EditorFor(model => model.Title)
+    <br /><br />
+    @Html.LabelFor(model => model.Description, "Лозунг")
+    <br />
+    @Html.EditorFor(model => model.Description) 
+    <br /><br />
+    @Html.LabelFor(model => model.Year, "Рік виходу")
+    <br />
+    @Html.EditorFor(model => model.Year)
+    <br /><br />
+    @Html.LabelFor(model => model.Country, "Країна")
+    <br />
+    @Html.EditorFor(model => model.Country)
+    <br /><br />
+    @Html.LabelFor(model => model.PosterPath, "Постер")
+    <br />
+    @Html.TextBoxFor(model => model.PosterPath, new { type = "file" })
+    <br /><br />
+    @Html.LabelFor(model => model.PosterBGPath, "Фоновий постер")
+    <br />
+    @Html.TextBoxFor(model => model.PosterBGPath, new { type = "file" })
+    <br /><br />
+    <div class="editor-label"><b>Жанри</b></div>
+
+    foreach (Genre g in ViewBag.genres)
+    {
+        @Html.CheckBox("Genres", false, new { @id = g.Id, @value = g.Name })
+        @Html.Label(g.Name)
+        <br />
+    }
+
+
+    <input type="submit" value="Додати" />
+}
+

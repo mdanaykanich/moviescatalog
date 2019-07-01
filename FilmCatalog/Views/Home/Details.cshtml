@@ -1,0 +1,45 @@
+﻿@model FilmCatalog.Models.FilmGenreView
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h4>@Model.Title</h4>
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-3">
+            <img src="@Model.PosterPath" width="200" height="200">
+        </div>
+        <div class="col">
+            <table>
+                <tr>
+                    <td>@Model.Country</td>
+                </tr>
+                <tr>
+                    <td>@Model.Description</td>
+                </tr>
+                <tr>
+                    <td>@Model.Year</td>
+                </tr>
+                <tr>
+                    @{ 
+                        var str = "";
+                        for (var i = 0; i < Model.Genres.Count; i++)
+                        {
+                            str += Model.Genres[i];
+                            if (i < Model.Genres.Count - 1)
+                            {
+                                str += ", ";
+                            }
+
+                        }
+                        <td>@str</td>
+                    }
+                </tr>
+            </table>
+        </div>
+    </div>
+    
+</div>
+

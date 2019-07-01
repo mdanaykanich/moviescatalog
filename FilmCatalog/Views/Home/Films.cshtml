@@ -1,0 +1,46 @@
+﻿@model List<FilmCatalog.Models.FilmGenreView>
+
+@{           
+    ViewBag.Title = "Фільми";
+}
+
+@{
+    if (Model.Count > 0)
+    {
+        foreach (var film in Model)
+        {
+            var str = "";
+            foreach (var genre in film.Genres)
+            {
+                str += genre + " ";
+            }
+            <div class="row" id="@film.Title" style="margin-top: 30px">
+                <div class="col-lg-3">
+
+                    <div style="width: 200px; margin: auto">
+                        <a href='@Url.Action("Details", "Home", new { id = film.Id })'>
+                            <img style="display: block; margin: auto" class="rounded-circle" src="@film.PosterPath" alt="Generic placeholder image" width="200" height="200">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div style="text-align: center">
+                        <h5 style="text-align: center">@film.Title</h5>
+                        <span>@str</span><br>
+                        <span>@film.Year,&nbsp;</span>
+                        <span style="font-style: italic">@film.Country</span>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <span> Фільмів за даними критеріями не знайдено...</span>
+    }
+}
+
+
+
+
+
